@@ -16,6 +16,15 @@ using [Facebook Pixel](https://developers.facebook.com/docs/marketing-api/facebo
 **Doesn't support:**
 * After adding/editing customer's billing info
 
+#Installation
+
+To install this extension you need to execute following commands:
+* modman init
+* modman clone git@github.com:thecvsi/magento-facebook-pixel.git
+
+To update extension to latest version you need to run following command:
+
+* modman update magento-facebook-pixel
 
 #Close look
 
