@@ -9,7 +9,7 @@
     <sections>
         <corevalue_facebookpixel module="corevalue_facebookpixel">
             <label>Facebook Pixel</label>
-            <tab>corevalue</tab>
+            <tab>corevalue_modules</tab>
             <sort_order>343</sort_order>
             <show_in_default>1</show_in_default>
             <show_in_website>1</show_in_website>
