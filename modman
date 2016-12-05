@@ -1,0 +1,5 @@
+# CoreValue_FacebookPixel
+app/etc/modules/CoreValue_FacebookPixel.xml                             app/etc/modules/CoreValue_FacebookPixel.xml
+app/code/community/CoreValue/FacebookPixel/*                            app/code/community/CoreValue/FacebookPixel
+app/design/frontend/base/default/layout/corevalue_facebookpixel.xml     app/design/frontend/base/default/layout/corevalue_facebookpixel.xml
+app/design/frontend/base/default/template/facebookpixel/*               app/design/frontend/base/default/template/facebookpixel

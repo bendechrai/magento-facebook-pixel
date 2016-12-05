@@ -1,0 +1,22 @@
+<?php
+$helper = Mage::helper("corevalue_facebookpixel");
+if (!$helper->isPixelEnabled() || !$helper->isConversionEnabled()) {
+    return;
+}
+$pixelId = $helper->getPixelId();
+
+$query = Mage::app()->getRequest()->getQuery();
+?>
+
+<!-- Facebook Pixel Code -->
+<script>
+fbq('track', 'Search', {
+        content_category: 'product',
+        search_string: '<?php echo implode(', ', $query) ?>'
+    });
+</script>
+<noscript>
+    <img height="1" width="1" style="display:none"
+         src="https://www.facebook.com/tr?id=<?php echo $pixelId; ?>&ev=PageView&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->

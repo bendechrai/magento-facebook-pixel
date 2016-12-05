@@ -1,0 +1,23 @@
+<?php
+$helper = Mage::helper("corevalue_facebookpixel");
+if (!$helper->isPixelEnabled() || !$helper->isConversionEnabled()) {
+    return;
+}
+$pixelId = $helper->getPixelId();
+/**
+ * @var $_subscriber Varien_Object
+ */
+$_subscriber = Mage::getModel('core/session')->getSubscriber();
+
+?>
+<?php if ($_subscriber && $_subscriber->getEmail()): ?>
+    <script>
+        fbq('track', 'Lead', {
+            value: '<?php echo $_subscriber->getEmail();?>',
+            currency: '<?php echo Mage::app()->getStore()->getCurrentCurrencyCode();?>',
+            content_name: '<?php echo $_subscriber->getContentName();?>',
+            content_category: '<?php echo $_subscriber->getContentCategory();?>'
+        });
+    </script>
+    <?php Mage::getModel('core/session')->unsSubscriber(); ?>
+<?php endif; ?>

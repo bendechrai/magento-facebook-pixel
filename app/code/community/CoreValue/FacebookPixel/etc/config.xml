@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <CoreValue_FacebookPixel>
+            <version>0.1.0</version>
+        </CoreValue_FacebookPixel>
+    </modules>
+    <global>
+        <models>
+            <corevalue_facebookpixel>
+                <class>CoreValue_FacebookPixel_Model</class>
+            </corevalue_facebookpixel>
+        </models>
+        <helpers>
+            <corevalue_facebookpixel>
+                <class>CoreValue_FacebookPixel_Helper</class>
+            </corevalue_facebookpixel>
+        </helpers>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <corevalue_facebookpixel>
+                    <file>corevalue_facebookpixel.xml</file>
+                </corevalue_facebookpixel>
+            </updates>
+        </layout>
+        <events>
+            <controller_action_predispatch_checkout_cart_add><!-- fires when adding to cart -->
+                <observers>
+                    <corevalue_facebookpixel>
+                        <class>corevalue_facebookpixel/observer</class>
+                        <method>addItemToCart</method>
+                    </corevalue_facebookpixel>
+                </observers>
+            </controller_action_predispatch_checkout_cart_add>
+
+            <controller_action_predispatch_wishlist_index_add><!-- fires when adding to wishlist -->
+                <observers>
+                    <corevalue_facebookpixel>
+                        <class>corevalue_facebookpixel/observer</class>
+                        <method>addItemToWishlist</method>
+                    </corevalue_facebookpixel>
+                </observers>
+            </controller_action_predispatch_wishlist_index_add>
+
+            <controller_action_predispatch_wishlist_index_cart><!-- fires when adding from wishlist to cart -->
+                <observers>
+                    <corevalue_facebookpixel>
+                        <class>corevalue_facebookpixel/observer</class>
+                        <method>addItemToCart</method>
+                    </corevalue_facebookpixel>
+                </observers>
+            </controller_action_predispatch_wishlist_index_cart>
+
+
+            <newsletter_subscriber_save_commit_after><!-- fires when customer subscribes on newsletter -->
+                <observers>
+                    <corevalue_facebookpixel>
+                        <class>corevalue_facebookpixel/observer</class>
+                        <method>onCustomerNewsletterSubscribe</method>
+                    </corevalue_facebookpixel>
+                </observers>
+            </newsletter_subscriber_save_commit_after>
+
+            <controller_action_postdispatch_newsletter_manage_save><!-- fires when customer subscribes on newsletter via account -->
+                <observers>
+                    <corevalue_facebookpixel>
+                        <class>corevalue_facebookpixel/observer</class>
+                        <method>postdispatchNewsletterManageSave</method>
+                    </corevalue_facebookpixel>
+                </observers>
+            </controller_action_postdispatch_newsletter_manage_save>
+
+            <core_block_abstract_to_html_before><!-- adds lead.phtml to head block if customer subscribed -->
+                <observers>
+                    <corevalue_facebookpixel>
+                        <class>corevalue_facebookpixel/observer</class>
+                        <method>insertLeadBlockTemplate</method>
+                    </corevalue_facebookpixel>
+                </observers>
+            </core_block_abstract_to_html_before>
+
+            <controller_action_predispatch_checkout_onepage_savePayment><!-- fires on product checkout when payment info been passed -->
+                <observers>
+                    <corevalue_facebookpixel>
+                        <class>corevalue_facebookpixel/observer</class>
+                        <method>predispatchCheckoutOnepageSavePayment</method>
+                    </corevalue_facebookpixel>
+                </observers>
+            </controller_action_predispatch_checkout_onepage_savePayment>
+
+            <controller_action_postdispatch_customer_account_createpost><!-- fires after member registration -->
+                <observers>
+                        <corevalue_facebookpixel>
+                            <class>corevalue_facebookpixel/observer</class>
+                            <method>customerAccountCreatepost</method>
+                        </corevalue_facebookpixel>
+                    </observers>
+            </controller_action_postdispatch_customer_account_createpost>
+
+        </events>
+    </frontend>
+    <default>
+        <corevalue_facebookpixel>
+            <enabled>0</enabled>
+            <conversion>0</conversion>
+        </corevalue_facebookpixel>
+    </default>
+</config>

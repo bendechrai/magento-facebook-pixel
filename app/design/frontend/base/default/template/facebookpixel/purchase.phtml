@@ -1,0 +1,27 @@
+<?php
+$helper = Mage::helper("corevalue_facebookpixel");
+if (!$helper->isPixelEnabled() || !$helper->isConversionEnabled()) {
+    return;
+}
+$pixelId = $helper->getPixelId();
+
+$order_id = (int)Mage::getSingleton('checkout/session')->getLastOrderId();
+if ($order_id < 1) {
+    return;
+}
+/** @var Mage_Sales_Model_Order $order */
+$order = Mage::getModel('sales/order')->load($order_id);
+?>
+
+<!-- Facebook Pixel Code -->
+<script>
+    fbq('track', 'Purchase', {
+        value: '<?php echo number_format($order->getGrandTotal(), 2, '.', ''); ?>',
+        currency: '<?php echo Mage::app()->getStore()->getCurrentCurrencyCode(); ?>'
+    });
+</script>
+<noscript>
+    <img height="1" width="1" style="display:none"
+         src="https://www.facebook.com/tr?id=<?php echo $pixelId; ?>&ev=PageView&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->

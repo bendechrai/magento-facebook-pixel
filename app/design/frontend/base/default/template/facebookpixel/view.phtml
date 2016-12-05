@@ -1,0 +1,38 @@
+<?php
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+
+$helper = Mage::helper("corevalue_facebookpixel");
+if (!$helper->isPixelEnabled() || !$helper->isConversionEnabled()) {
+    return;
+}
+$pixelId = $helper->getPixelId();
+/**
+ * @var $_product Mage_Catalog_Model_Product
+ */
+$_product = Mage::getModel('catalog/product')
+    ->load(Mage::getSingleton('catalog/session')->getData('last_viewed_product_id'));
+if (!$_product || !$_product->getId()) {
+    return;
+}
+?>
+
+<!-- Facebook Pixel Code -->
+<script>
+    fbq('track', 'ViewContent', {
+        content_name: '<?php echo $_product->getName(); ?>',
+        content_type: 'product',
+        content_ids: '<?php echo $_product->getSku(); ?>',
+        value: '<?php echo number_format((float)$_product->getPrice(), 2, '.', ''); ?>',
+        currency: '<?php echo Mage::app()->getStore()->getCurrentCurrencyCode(); ?>'
+    });
+</script>
+<noscript>
+    <img height="1" width="1" style="display:none"
+         src="https://www.facebook.com/tr?id=<?php echo $pixelId; ?>&ev=PageView&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->

@@ -1,0 +1,23 @@
+<?php
+$helper = Mage::helper("corevalue_facebookpixel");
+if (!$helper->isPixelEnabled() || !$helper->isConversionEnabled()) {
+    return;
+}
+$pixelId = $helper->getPixelId();
+/**
+ * @var $_product Mage_Customer_Model_Customer
+ */
+$_customer = Mage::getModel('core/session')->getCompleteRegistration();
+
+?>
+<?php if ($_customer && $_customer->getValue()): ?>
+    <script>
+        fbq('track', 'CompleteRegistration', {
+            value: '<?php echo $_customer->getValue() ?>',
+            currency: '<?php echo Mage::app()->getStore()->getCurrentCurrencyCode() ?>',
+            content_name: '<?php echo $_customer->getContentName() ?>',
+            status: '<?php echo $_customer->getStatus() ?>',
+        });
+    </script>
+    <?php Mage::getModel('core/session')->unsCompleteRegistration(); ?>
+<?php endif; ?>

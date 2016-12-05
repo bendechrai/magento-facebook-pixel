@@ -1,0 +1,23 @@
+<?php
+$helper = Mage::helper("corevalue_facebookpixel");
+if (!$helper->isPixelEnabled() || !$helper->isConversionEnabled()) {
+    return;
+}
+$pixelId = $helper->getPixelId();
+/**
+ * @var $_product Mage_Catalog_Model_Product
+ */
+$_product = Mage::getModel('core/session')->getProductToWishlist()
+?>
+<?php if ($_product && $_product->getId()): ?>
+    <script>
+            fbq('track', 'AddToWishlist', {
+                content_name: '<?php echo $_product->getName()?>',
+                content_ids: '<?php $_product->getSku()?>',
+                content_category: 'product',
+                value: '<?php echo number_format((float)$_product->getPrice(),2,'.','');?>',
+                currency: '<?php echo Mage::app()->getStore()->getCurrentCurrencyCode();?>'
+            });
+    </script>
+    <?php Mage::getModel('core/session')->unsProductToWishlist(); ?>
+<?php endif ?>

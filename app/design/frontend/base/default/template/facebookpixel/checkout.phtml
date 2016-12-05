@@ -1,0 +1,25 @@
+<?php
+$helper = Mage::helper("corevalue_facebookpixel");
+if (!$helper->isPixelEnabled() || !$helper->isConversionEnabled()) {
+    return;
+}
+$quote = Mage::getSingleton('checkout/cart')->getQuote();
+$pixelId = $helper->getPixelId();
+$productIds = $helper->getCartProductIds($quote);
+?>
+
+<!-- Facebook Pixel Code -->
+<script>
+    fbq('track', 'InitiateCheckout', {
+        content_name: 'Initiate Checkout',
+        content_ids: '<?php echo $productIds ?>',
+        content_type: 'product',
+        value: '<?php echo number_format($quote->getGrandTotal(), 2, '.', '')?>',
+        currency: '<?php echo Mage::app()->getStore()->getCurrentCurrencyCode(); ?>'
+    });
+</script>
+<noscript>
+    <img height="1" width="1" style="display:none"
+         src="https://www.facebook.com/tr?id=<?php echo $pixelId; ?>&ev=PageView&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->

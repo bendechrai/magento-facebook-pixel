@@ -1,0 +1,23 @@
+<?php
+$helper = Mage::helper("corevalue_facebookpixel");
+if (!$helper->isPixelEnabled() || !$helper->isConversionEnabled()) {
+    return;
+}
+$pixelId = $helper->getPixelId();
+/**
+ * @var $_product Mage_Catalog_Model_Product
+ */
+$_paymentInfo = Mage::getModel('core/session')->getPaymentInfo();
+
+?>
+<?php if ($_paymentInfo && $_paymentInfo->getValue()): ?>
+    <script>
+        fbq('track', 'AddPaymentInfo', {
+            value: '<?php echo $_paymentInfo->getValue() ?>',
+            currency: '<?php echo $_paymentInfo->getCurrency() ?>',
+            content_ids: '<?php echo $_paymentInfo->getContentIds() ?>',
+            content_category: '<?php echo $_paymentInfo->getContentCategory() ?>',
+        });
+    </script>
+    <?php Mage::getModel('core/session')->unsPaymentInfo(); ?>
+<?php endif; ?>
