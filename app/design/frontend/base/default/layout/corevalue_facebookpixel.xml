@@ -42,4 +42,15 @@
         </reference>
     </checkout_onepage_review>
 
+    <checkout_onepage_additional>
+        <reference name="root">
+            <block type="core/template" name="customer.edit.address.info" output="toHtml" template="facebookpixel/customer-edit-address.phtml" />
+        </reference>
+    </checkout_onepage_additional>
+
+    <customer_address_index>
+        <reference name="address_book">
+            <block type="core/template" name="customer.edit.address.info" output="toHtml" template="facebookpixel/customer-edit-address.phtml" />
+        </reference>
+    </customer_address_index>
 </layout>

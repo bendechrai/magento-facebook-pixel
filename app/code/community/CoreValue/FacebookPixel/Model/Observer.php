@@ -208,4 +208,51 @@ class CoreValue_FacebookPixel_Model_Observer
         ));
     }
 
+    /**
+     * Here we create an object, which later we save in core/session object
+     * Event fires after customer changes billing info
+     *
+     * @param $email
+     * @return Varien_Object
+     */
+    public function checkoutOnepageSaveBilling()
+    {
+        /**
+         * @var $checkout Mage_Sales_Model_Quote
+         */
+        $checkout = Mage::getSingleton('checkout/session')->getQuote();
+        $bilAddress = $checkout->getBillingAddress()->format('text');
+        if ($bilAddress) {
+            Mage::getModel('core/session')->setCustomerEditAddressData(
+                new Varien_Object(array(
+                    'value' => preg_replace( "/\r|\n/", " ", $bilAddress ),
+                    'content_name' => 'customer edit billing info',
+                ))
+            );
+        }
+    }
+
+    /**
+     * Here we create an object, which later we save in core/session object
+     * Event fires after customer changes billing info in customer account
+     *
+     * @param $email
+     * @return Varien_Object
+     */
+    public function customerAddressSaveAfter($observer)
+    {
+        /**
+         * @var $observer Varien_Event_Observer
+         */
+        $bilAddress = $observer->getCustomerAddress()->format('text');
+        if ($bilAddress) {
+            Mage::getModel('core/session')->setCustomerEditAddressData(
+                new Varien_Object(array(
+                    'value' => preg_replace( "/\r|\n/", " ", $bilAddress ),
+                    'content_name' => 'customer edit billing info',
+                ))
+            );
+        }
+    }
+
 }

@@ -1,0 +1,26 @@
+<?php
+$helper = Mage::helper("corevalue_facebookpixel");
+if (!$helper->isPixelEnabled() || !$helper->isConversionEnabled()) {
+    return;
+}
+$pixelId = $helper->getPixelId();
+
+/**
+ * @var $pixel_obj Varien_Object
+ */
+$pixel_obj = Mage::getModel('core/session')->getCustomerEditAddressData();
+
+?>
+<?php if ($pixel_obj && $pixel_obj->getValue()): ?>
+    <script>
+        var pixel_value = '<?php echo $pixel_obj->getValue() ?>';
+        if(pixel_value.length) {
+            fbq('track', 'AddPaymentInfo', {
+                value: pixel_value,
+                currency: '<?php echo Mage::app()->getStore()->getCurrentCurrencyCode() ?>',
+                content_name: '<?php echo $pixel_obj->getContentName() ?>'
+            });
+        }
+    </script>
+    <?php Mage::getModel('core/session')->unsCustomerEditAddressData(); ?>
+<?php endif; ?>

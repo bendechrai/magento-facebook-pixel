@@ -99,6 +99,25 @@
                     </observers>
             </controller_action_postdispatch_customer_account_createpost>
 
+            <controller_action_postdispatch_checkout_onepage_saveBilling>
+                <observers>
+                    <corevalue_facebookpixel>
+                        <type>singleton</type>
+                        <class>corevalue_facebookpixel/observer</class>
+                        <method>checkoutOnepageSaveBilling</method>
+                    </corevalue_facebookpixel>
+                </observers>
+            </controller_action_postdispatch_checkout_onepage_saveBilling>
+
+            <customer_address_save_after>
+                <observers>
+                    <corevalue_facebookpixel>
+                        <class>corevalue_facebookpixel/observer</class>
+                        <method>customerAddressSaveAfter</method>
+                    </corevalue_facebookpixel>
+                </observers>
+            </customer_address_save_after>
+
         </events>
     </frontend>
     <default>
