@@ -12,8 +12,6 @@ using [Facebook Pixel](https://developers.facebook.com/docs/marketing-api/facebo
 * Customer subscribes on newsletter
 * Customer subscribes on newsletter via account
 * Payment info has been passed
-
-**Doesn't support:**
 * After adding/editing customer's billing info
 
 #Installation
