@@ -13,7 +13,8 @@ $_product = Mage::getModel('core/session')->getProductToWishlist()
     <script>
             fbq('track', 'AddToWishlist', {
                 content_name: '<?php echo $_product->getName()?>',
-                content_ids: '<?php $_product->getSku()?>',
+                content_type: 'product',
+                content_ids: '<?php echo $_product->getSku()?>',
                 content_category: 'product',
                 value: '<?php echo number_format((float)$_product->getPrice(),2,'.','');?>',
                 currency: '<?php echo Mage::app()->getStore()->getCurrentCurrencyCode();?>'
