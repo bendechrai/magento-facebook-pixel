@@ -26,14 +26,14 @@
             </updates>
         </layout>
         <events>
-            <controller_action_predispatch_checkout_cart_add><!-- fires when adding to cart -->
+            <checkout_cart_add_product_complete><!-- fires from Mage_Checkout_CartController::addAction() -->
                 <observers>
                     <corevalue_facebookpixel>
                         <class>corevalue_facebookpixel/observer</class>
                         <method>addItemToCart</method>
                     </corevalue_facebookpixel>
                 </observers>
-            </controller_action_predispatch_checkout_cart_add>
+            </checkout_cart_add_product_complete>
 
             <controller_action_predispatch_wishlist_index_add><!-- fires when adding to wishlist -->
                 <observers>
